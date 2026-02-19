@@ -1,0 +1,11 @@
+:host {
+    .container {
+        width: 500px;
+        border: 2px solid #123456;
+        border-radius: 12px;
+
+        margin:50px auto;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        min-height: 800px;
+    }
+}

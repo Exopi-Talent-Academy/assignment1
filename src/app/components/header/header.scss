@@ -1,0 +1,19 @@
+:host {
+    .header {
+        display: block;
+        background-color: #123456;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        .title {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 30px;
+            padding: 12px;
+            letter-spacing: 8px;
+        }
+    }
+}

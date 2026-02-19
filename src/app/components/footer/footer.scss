@@ -1,0 +1,14 @@
+:host {
+    .footer {
+        border: 1px solid #123456;
+        background-color: #123456;
+        margin-top: 18px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        p {
+            color: #fff;
+            text-align: center;
+            margin: 6px 0;
+        }
+    }
+}
