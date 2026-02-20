@@ -2,13 +2,13 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './components/header/header';
 import { Container } from './shared/container/container';
-import { Body } from './components/body/body';
 import { Keyboard } from './components/keyboard/keyboard';
 import { Footer } from './components/footer/footer';
+import { Board } from './components/board/board';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Container, Body, Keyboard, Footer],
+  imports: [RouterOutlet, Header, Container, Keyboard, Footer, Board],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

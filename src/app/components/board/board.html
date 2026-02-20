@@ -1,0 +1,7 @@
+<div #board tabindex="0" class="board" (keyup)="yourMethod($event)">
+    @for(item of board | async; track $index ) {
+        <div class="input-text">
+            <p >{{item}}</p>
+        </div>
+    }
+</div>
