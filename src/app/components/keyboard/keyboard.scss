@@ -1,5 +1,29 @@
 :host {
     display:block;
-    border: 1px solid gray;
     min-height: 25vh;
+
+    .keyboard {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+        margin-top: 24px;
+    }
+
+    .each-row {
+        display: flex;
+        gap: 6px;
+        margin: auto;
+
+        .each-key {
+            background-color: rgb(215, 207, 207);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: min-content;
+            padding: 20px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+    }
 }

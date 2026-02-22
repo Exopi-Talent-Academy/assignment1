@@ -1,3 +1,11 @@
 <div class="keyboard">
-    <p>keyboard works!</p>
+    @for(row of keyboard; track $index) {
+        <div class="each-row">
+            @for(key of row; track key) {
+            <div class="each-key">
+                {{ key }}
+            </div>
+        }
+        </div>
+    }
 </div>

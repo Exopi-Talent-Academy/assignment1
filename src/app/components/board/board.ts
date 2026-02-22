@@ -22,6 +22,7 @@ export class Board implements AfterViewInit {
 
   ngAfterViewInit() {
     this.boardDiv.nativeElement.focus();
+    this.board$.subscribe(console.log);
   }
 
   yourMethod(event: KeyboardEvent){
