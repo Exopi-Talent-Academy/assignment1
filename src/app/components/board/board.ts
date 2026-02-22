@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import {MatButtonModule} from '@angular/material/button';
 import { BehaviorSubject } from 'rxjs';
@@ -10,13 +11,17 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })
-export class Board implements OnInit {
+export class Board implements AfterViewInit {
+
+  @ViewChild('board') boardDiv : ElementRef;
 
   index = 0;
 
-  board = new BehaviorSubject<string []>(new Array(36));
+  board$ = new BehaviorSubject<string []>(new Array(36).fill(''));
 
-  ngOnInit() {
+
+  ngAfterViewInit() {
+    this.boardDiv.nativeElement.focus();
   }
 
   yourMethod(event: KeyboardEvent){
@@ -29,8 +34,8 @@ export class Board implements OnInit {
   }
 
   updateCell(key: string){
-    let currentBoard = [...this.board.value];
+    let currentBoard = [...this.board$.value];
       currentBoard[this.index] = key.toUpperCase();
-      this.board.next(currentBoard);
+      this.board$.next(currentBoard);
   }
 }
