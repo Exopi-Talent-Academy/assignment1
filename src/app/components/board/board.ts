@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { AfterViewInit, inject } from '@angular/core';
+import { AfterViewInit, inject, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import {MatButtonModule} from '@angular/material/button';
@@ -16,6 +16,7 @@ import { DataService } from '../../services/data-service';
 export class Board implements OnInit, AfterViewInit {
 
   @ViewChild('board') boardDiv : ElementRef;
+  @ViewChildren('eachKey') allKeys : QueryList<ElementRef>;
 
   keyHandleService = inject(KeyHandle);
   dataService = inject(DataService);
@@ -25,11 +26,16 @@ export class Board implements OnInit, AfterViewInit {
 
   index = 0;
 
-  board$ = new BehaviorSubject<string []>(new Array(36).fill(''));
+  board$ = new BehaviorSubject<string []>(new Array(25).fill(''));
+
+  constructor(private renderer: Renderer2) {
+    
+  }
 
   ngOnInit(): void {
     console.log("Display Data: .....")
    this.dataService.getData().subscribe(data => {
+    console.log(data);
     this.allData = data;
     this.result = this.allData[Math.floor(Math.random() * data.length)];
     console.log(this.result);
@@ -44,18 +50,25 @@ export class Board implements OnInit, AfterViewInit {
 
   yourMethod(event: KeyboardEvent){
     const regex = /[a-zA-Z]/;
-    if(regex.test(event.key) && event.key.length === 1 && this.index < 36) {
+    if(regex.test(event.key) && event.key.length === 1 && this.index < 25) {
       this.currentWord += event.key;
       this.keyHandleService.countKey(event.key);
       this.updateCell(event.key);
       this.index += 1;
-      if(this.index % 6 === 0 && this.index !== 0) {
+      if(this.index % 5 === 0 && this.index !== 0) {
         this.boardDiv.nativeElement.blur();
         console.log(this.currentWord);
-        setTimeout(() => {
+        if(this.currentWord === this.result){
+          this.boardDiv.nativeElement.blur();
+          this.displayResult();
+        }else {
+          this.displayYellowGray();
+           setTimeout(() => {
           this.currentWord = '';
           this.boardDiv.nativeElement.focus();
         }, 1500 );
+        }
+       
       }
       
     }  
@@ -65,5 +78,36 @@ export class Board implements OnInit, AfterViewInit {
     let currentBoard = [...this.board$.value];
       currentBoard[this.index] = key.toUpperCase();
       this.board$.next(currentBoard);
+  }
+
+  displayResult() {
+    let count = this.index - 5;
+    this.allKeys.forEach((el:ElementRef, index )=> {
+      if(count === index && count < this.index){
+        this.renderer.addClass(el.nativeElement, 'animated');
+        this.renderer.addClass(el.nativeElement, 'matched');
+        // console.log(el.nativeElement);
+        count ++;
+      }
+    })
+  }
+
+  displayYellowGray() {
+    let count = this.index - 5;
+    this.allKeys.forEach((el:ElementRef, index )=> {
+      if(count === index && count < this.index){
+        this.renderer.addClass(el.nativeElement, 'animated');
+
+        for(let char of this.currentWord){
+          console.log(char, this.result, this.currentWord);
+          if(this.result.includes(char)) {
+            this.renderer.addClass(el.nativeElement, 'yellow');
+            return
+          }   
+        }
+        this.renderer.addClass(el.nativeElement, 'gray')
+        count ++;
+      }
+    })
   }
 }

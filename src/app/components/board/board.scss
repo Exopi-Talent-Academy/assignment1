@@ -3,7 +3,7 @@
     min-height: 37vh;
     .board {
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 6px;
         max-width: 344px;
         margin: auto;
@@ -28,6 +28,32 @@
 
         p {
             margin: 0;
-        }        
+        }    
     }
+    .matched {
+            background-color: green;
+            color: white;
+        }
+    .animated {
+        animation: flip 0.5s ease;
+    }
+    @keyframes flip {
+        0% {
+            transform: scaleY(1);
+        }
+        50% {
+            transform: scaleY(0);
+        }
+        100% {
+            transform: scaleY(1);
+        }
+    }
+    .yellow {
+            background-color: yellow;
+            color: white;
+        }
+    .gray {
+            background-color: gray;
+            color: white;
+        }
 }
