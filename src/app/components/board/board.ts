@@ -34,8 +34,12 @@ export class Board implements OnInit, AfterViewInit {
 
   yourMethod(event: KeyboardEvent){
     const regex = /^[a-zA-Z]+$/;
-    if(event.key !== "Tab" && regex.test(event.key) && this.index < 36 ){
-      this.keyHandleService.countKey();
+    if(event.key === "ENTER"){
+      console.log(event.key !== "ENTER");
+      return
+    }
+    else if(event.key !== "Tab" && regex.test(event.key) && this.index < 36 ){
+      this.keyHandleService.countKey(event.key);
       this.updateCell(event.key);
       this.index += 1;
       if(this.index % 6 === 0 && this.index !== 0) {

@@ -1,15 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { KeyHandle } from '../../services/key-handle';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-keyboard',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './keyboard.html',
   styleUrl: './keyboard.scss',
 })
-export class Keyboard {
+export class Keyboard implements OnInit {
+  keyHandleService = inject(KeyHandle);
+
+  keysList = [];
+
   keyboard = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
     ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "BACK"]
   ]
+
+  ngOnInit(): void {
+    this.keyHandleService.keysList.subscribe(keysList => {
+      this.keysList = keysList;
+    })
+  }
+
+  keyExists(key: string){
+    console.log(key);
+    if(key !=='ENTER' && key !=='BACK') {
+      if(this.keysList.includes(key)) {
+        return 'green';
+      }
+    }
+    return ''
+    
+  }
 }

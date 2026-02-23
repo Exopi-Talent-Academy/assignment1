@@ -24,6 +24,15 @@
             padding: 20px 15px;
             border-radius: 8px;
             font-weight: bold;
+            &.green {
+                background-color: rgb(173, 233, 173);
+            }
+             &.yellow {
+                background-color: rgb(235, 216, 135);
+            }
+             &.gray {
+                background-color: rgb(163, 165, 163);
+            }
         }
     }
 }
