@@ -9,7 +9,7 @@ import { KeyHandle } from './services/key-handle';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Container, Keyboard, Footer, Board, ],
+  imports: [RouterOutlet, Header, Container, Keyboard, Footer, Board],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
