@@ -33,12 +33,8 @@ export class Board implements OnInit, AfterViewInit {
   }
 
   yourMethod(event: KeyboardEvent){
-    const regex = /^[a-zA-Z]+$/;
-    if(event.key === "ENTER"){
-      console.log(event.key !== "ENTER");
-      return
-    }
-    else if(event.key !== "Tab" && regex.test(event.key) && this.index < 36 ){
+    const regex = /[a-zA-Z]/;
+    if(regex.test(event.key) && event.key.length === 1 && this.index < 36) {
       this.keyHandleService.countKey(event.key);
       this.updateCell(event.key);
       this.index += 1;
@@ -46,10 +42,10 @@ export class Board implements OnInit, AfterViewInit {
         this.boardDiv.nativeElement.blur();
         setTimeout(() => {
           this.boardDiv.nativeElement.focus();
-        }, 2000 );
+        }, 1500 );
       }
-    }
-    
+      
+    }  
   }
 
   updateCell(key: string){

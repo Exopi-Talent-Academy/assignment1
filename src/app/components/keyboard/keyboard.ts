@@ -26,7 +26,6 @@ export class Keyboard implements OnInit {
   }
 
   keyExists(key: string){
-    console.log(key);
     if(key !=='ENTER' && key !=='BACK') {
       if(this.keysList.includes(key)) {
         return 'green';
