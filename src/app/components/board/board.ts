@@ -44,7 +44,7 @@ export class Board implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.boardDiv.nativeElement.focus();
-    this.board$.subscribe(console.log);
+    this.board$.subscribe();
 
   }
 
@@ -85,7 +85,7 @@ export class Board implements OnInit, AfterViewInit {
     this.allKeys.forEach((el:ElementRef, index )=> {
       if(count === index && count < this.index){
         this.renderer.addClass(el.nativeElement, 'animated');
-        this.renderer.addClass(el.nativeElement, 'matched');
+        this.renderer.addClass(el.nativeElement, 'green');
         // console.log(el.nativeElement);
         count ++;
       }
@@ -98,17 +98,9 @@ export class Board implements OnInit, AfterViewInit {
     console.log(matchedResult);
     this.allKeys.forEach((el:ElementRef, index )=> {
       if(count === index && count < this.index){
-        // console.log("here:-  ", index, this.currentWord, this.result);
-        
-        // for(let char of this.currentWord){
-        //   console.log(char, this.result, this.currentWord);
-        //   this.renderer.addClass(el.nativeElement, 'animated');
-        //   if(this.result.includes(char)) {
-        //     this.renderer.addClass(el.nativeElement, 'yellow');
-        //     return
-        //   }   
-        // }
-        // this.renderer.addClass(el.nativeElement, 'gray')
+        console.log('index is: ',index)
+        this.renderer.addClass(el.nativeElement, matchedResult[index % 5]);
+        this.renderer.addClass(el.nativeElement, 'animated');
         count ++;
       }
     })
@@ -129,7 +121,14 @@ export class Board implements OnInit, AfterViewInit {
         matchedResult[index] = "green";
         currentWord[index] = '';
         result[index] = '';
-      }else if(result.includes(char)) {
+      }
+    })
+    console.log('first ', matchedResult);
+    currentWord.forEach((char, index) => {
+      if(result.includes(char)) {
+        if(!char){
+          return;
+        }
         matchedResult[index] = 'yellow';
         currentWord[index] = '';
         let indexInResult = result.indexOf(char);
