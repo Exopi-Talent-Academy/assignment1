@@ -2,6 +2,7 @@
     display:block;
     min-height: 37vh;
     .board {
+        position: relative;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 6px;
@@ -60,4 +61,20 @@
             background-color: var(--black);
             color: white;
     }
+
+    // .message-model {
+    //     position: absolute;
+    //     inset: 0;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     background-color: rgba(243, 241, 241, 0.1);
+    //     p {
+    //         background-color: rgb(240, 236, 236);
+    //         color: white;
+    //         padding: 12px;
+    //         border: 6px;
+    //         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    //     }
+    // }
 }

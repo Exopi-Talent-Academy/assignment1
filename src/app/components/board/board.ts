@@ -3,7 +3,7 @@ import { AfterViewInit, inject, QueryList, Renderer2, ViewChildren } from '@angu
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import {MatButtonModule} from '@angular/material/button';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { KeyHandle } from '../../services/key-handle';
 import { DataService } from '../../services/data-service';
 
@@ -40,6 +40,7 @@ export class Board implements OnInit, AfterViewInit {
     this.result = this.allData[Math.floor(Math.random() * data.length)];
     console.log(this.result);
    })
+
   }
 
   ngAfterViewInit() {
@@ -56,13 +57,14 @@ export class Board implements OnInit, AfterViewInit {
       this.updateCell(event.key);
       this.index += 1;
       if(this.index % 5 === 0 && this.index !== 0) {
+        
         this.boardDiv.nativeElement.blur();
         console.log(this.currentWord);
+        this.displayDifferentColor();
         if(this.currentWord === this.result){
           this.boardDiv.nativeElement.blur();
-          this.displayResult();
+          
         }else {
-          this.displayDifferentColor();
            setTimeout(() => {
           this.currentWord = '';
           this.boardDiv.nativeElement.focus();
@@ -142,4 +144,11 @@ export class Board implements OnInit, AfterViewInit {
 
     return matchedResult;
   }
+
+  // showMessage(message: string) {
+  //   this.message$.next(message);
+  //   setTimeout(()=> {
+  //     this.message$.next(null);
+  //   }, 2000)
+  // }
 }
