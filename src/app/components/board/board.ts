@@ -28,6 +28,7 @@ export class Board implements OnInit, AfterViewInit {
   index = 0;
 
   board$ = new BehaviorSubject<string []>(new Array(25).fill(''));
+  keyPadColor = {};
 
   constructor(private renderer: Renderer2) {
     
@@ -75,6 +76,7 @@ export class Board implements OnInit, AfterViewInit {
       }
       
     }  
+    console.log("keyboard:  ",this.keyPadColor)
   }
 
   updateCell(key: string){
@@ -121,6 +123,8 @@ export class Board implements OnInit, AfterViewInit {
     let result = this.result.split('');
     currentWord.forEach((char, index) => {
       if(currentWord[index] === result[index]) {
+        this.keyPadColor[char] = "green";
+        this.keyPadColor = {...this.keyPadColor};
         matchedResult[index] = "green";
         currentWord[index] = '';
         result[index] = '';
@@ -133,11 +137,15 @@ export class Board implements OnInit, AfterViewInit {
           return;
         }
         matchedResult[index] = 'yellow';
+        this.keyPadColor[char] = "yellow";
+        this.keyPadColor = {...this.keyPadColor};
         currentWord[index] = '';
         let indexInResult = result.indexOf(char);
         result[indexInResult] = '';
       }else {
         matchedResult[index] = 'black';
+        this.keyPadColor[char] = "black";
+        this.keyPadColor = {...this.keyPadColor};
       }
       
     })

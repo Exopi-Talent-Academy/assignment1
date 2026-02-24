@@ -42,4 +42,22 @@ body {
   --gray:    #3a3a3c;
   --yellow:  #b59f3b;
   --green:   #538d4e;
+
+
+  .green {
+            background-color: var(--green);
+            color: white;
+        }
+    .yellow {
+            background-color: var(--yellow);
+            color: white;
+        }
+    .gray {
+            background-color: var(--gray);
+            color: white;
+        }
+    .black {
+            background-color: var(--black);
+            color: white;
+    }
 }
