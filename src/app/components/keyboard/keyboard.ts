@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { KeyHandle } from '../../services/key-handle';
 import { CommonModule } from '@angular/common';
 
@@ -12,6 +12,8 @@ export class Keyboard implements OnInit {
   keyHandleService = inject(KeyHandle);
 
   keysList = [];
+
+  @Input() currentKey = '';
 
   keyboard = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],

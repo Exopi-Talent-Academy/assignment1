@@ -6,10 +6,11 @@ import {MatButtonModule} from '@angular/material/button';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { KeyHandle } from '../../services/key-handle';
 import { DataService } from '../../services/data-service';
+import { Keyboard } from '../keyboard/keyboard';
 
 @Component({
   selector: 'app-board',
-  imports: [MatButtonModule, AsyncPipe],
+  imports: [MatButtonModule, AsyncPipe, Keyboard],
   templateUrl: './board.html',
   styleUrl: './board.scss',
 })
