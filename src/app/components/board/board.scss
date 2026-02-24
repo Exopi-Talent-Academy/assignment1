@@ -5,7 +5,7 @@
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 6px;
-        max-width: 344px;
+        max-width: 284px;
         margin: auto;
         padding: 12px; 
 
@@ -31,7 +31,7 @@
         }    
     }
     .matched {
-            background-color: green;
+            background-color: var(--right);
             color: white;
         }
     .animated {
@@ -49,11 +49,11 @@
         }
     }
     .yellow {
-            background-color: yellow;
+            background-color: var(--yellow);
             color: white;
         }
     .gray {
-            background-color: gray;
+            background-color: var(--gray);
             color: white;
         }
 }

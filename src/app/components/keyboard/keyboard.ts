@@ -34,4 +34,8 @@ export class Keyboard implements OnInit {
     return ''
     
   }
+
+  takeInput(key: string) {
+    console.log(key);
+  }
 }

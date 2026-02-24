@@ -62,7 +62,7 @@ export class Board implements OnInit, AfterViewInit {
           this.boardDiv.nativeElement.blur();
           this.displayResult();
         }else {
-          this.displayYellowGray();
+          this.displayDifferentColor();
            setTimeout(() => {
           this.currentWord = '';
           this.boardDiv.nativeElement.focus();
@@ -92,22 +92,55 @@ export class Board implements OnInit, AfterViewInit {
     })
   }
 
-  displayYellowGray() {
+  displayDifferentColor() {
     let count = this.index - 5;
+    let matchedResult = this.findColors();
+    console.log(matchedResult);
     this.allKeys.forEach((el:ElementRef, index )=> {
       if(count === index && count < this.index){
-        this.renderer.addClass(el.nativeElement, 'animated');
-
-        for(let char of this.currentWord){
-          console.log(char, this.result, this.currentWord);
-          if(this.result.includes(char)) {
-            this.renderer.addClass(el.nativeElement, 'yellow');
-            return
-          }   
-        }
-        this.renderer.addClass(el.nativeElement, 'gray')
+        // console.log("here:-  ", index, this.currentWord, this.result);
+        
+        // for(let char of this.currentWord){
+        //   console.log(char, this.result, this.currentWord);
+        //   this.renderer.addClass(el.nativeElement, 'animated');
+        //   if(this.result.includes(char)) {
+        //     this.renderer.addClass(el.nativeElement, 'yellow');
+        //     return
+        //   }   
+        // }
+        // this.renderer.addClass(el.nativeElement, 'gray')
         count ++;
       }
     })
+  }
+
+  findColors() {
+    let matchedResult = {
+      0: '',
+      1: '',
+      2: '',
+      3: '',
+      4: ''
+    };
+    let currentWord = this.currentWord.split('');
+    let result = this.result.split('');
+    currentWord.forEach((char, index) => {
+      if(currentWord[index] === result[index]) {
+        matchedResult[index] = "green";
+        currentWord[index] = '';
+        result[index] = '';
+      }else if(result.includes(char)) {
+        matchedResult[index] = 'yellow';
+        currentWord[index] = '';
+        let indexInResult = result.indexOf(char);
+        result[indexInResult] = '';
+      }else {
+        matchedResult[index] = 'black';
+      }
+      
+    })
+
+
+    return matchedResult;
   }
 }
