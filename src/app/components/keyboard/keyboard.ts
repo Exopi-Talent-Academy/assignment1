@@ -13,22 +13,21 @@ export class Keyboard implements OnInit {
 
   keysList = [];
 
-
   @Input() keyPadColor = {};
 
   keyboard = [
-    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-    ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "BACK"]
-  ]
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+    ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'],
+  ];
 
   ngOnInit(): void {
-    this.keyHandleService.keysList.subscribe(keysList => {
+    this.keyHandleService.keysList.subscribe((keysList) => {
       this.keysList = keysList;
-    })
+    });
   }
 
-  updateColor(key:string) {
+  updateColor(key: string) {
     return this.keyPadColor[key.toLowerCase()];
   }
 }

@@ -10,9 +10,8 @@ export class DataService {
 
   success$ = new Subject<boolean>();
 
-
-  getData() : Observable<string []> {
-    return this.http.get<string []>("http://localhost:3000/data");
+  getData(): Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:3000/data');
   }
 
   setSuccess(value: boolean) {
