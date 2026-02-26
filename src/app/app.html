@@ -10,4 +10,9 @@
       <app-footer></app-footer>
     </div>
   </div>
+  @if(keyCount > 24 || success ) {
+    <div class="model-message">
+    <p class="message" [ngStyle]="{'background-color': success ? 'green' : 'red', 'color': 'white'}">{{ success ? "Congratulations! You won!" : "Game Over! Try again next time." }}</p>
+  </div> 
+  }
 </app-container>
