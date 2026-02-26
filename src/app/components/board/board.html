@@ -1,4 +1,4 @@
-<div #board tabindex="0" class="board" (keyup)="yourMethod($event)">
+<div #board tabindex="0" class="board" (keyup)="getInputAndProcess($event)">
     @for(item of board$ | async; track $index ) {
         <div #eachKey class="input-text">
             <p >{{item}}</p>

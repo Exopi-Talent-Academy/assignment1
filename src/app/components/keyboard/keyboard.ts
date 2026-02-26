@@ -13,7 +13,6 @@ export class Keyboard implements OnInit {
 
   keysList = [];
 
-  @Input() currentKey = '';
 
   @Input() keyPadColor = {};
 
@@ -27,20 +26,6 @@ export class Keyboard implements OnInit {
     this.keyHandleService.keysList.subscribe(keysList => {
       this.keysList = keysList;
     })
-  }
-
-  keyExists(key: string){
-    if(key !=='ENTER' && key !=='BACK') {
-      if(this.keysList.includes(key)) {
-        return 'green';
-      }
-    }
-    return ''
-    
-  }
-
-  takeInput(key: string) {
-    console.log(key);
   }
 
   updateColor(key:string) {

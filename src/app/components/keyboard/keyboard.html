@@ -2,7 +2,7 @@
     @for(row of keyboard; track $index) {
         <div class="each-row">
             @for(key of row; track key) {
-            <div class="each-key" (click)="takeInput(key)" [ngClass]="keyExists(key)" [ngClass]="updateColor(key)">
+            <div class="each-key"  [ngClass]="updateColor(key)">
                 {{ key }}
             </div>
         }

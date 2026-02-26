@@ -8,6 +8,8 @@ import { KeyHandle } from '../../services/key-handle';
 import { DataService } from '../../services/data-service';
 import { Keyboard } from '../keyboard/keyboard';
 
+import { findColorForEachKey } from '../utils/helper';
+
 @Component({
   selector: 'app-board',
   imports: [MatButtonModule, AsyncPipe, Keyboard],
@@ -21,6 +23,7 @@ export class Board implements OnInit, AfterViewInit {
 
   keyHandleService = inject(KeyHandle);
   dataService = inject(DataService);
+  renderer = inject(Renderer2);
   currentWord = '';
   allData: string [] = [];
   result = '';
@@ -30,28 +33,19 @@ export class Board implements OnInit, AfterViewInit {
   board$ = new BehaviorSubject<string []>(new Array(25).fill(''));
   keyPadColor = {};
 
-  constructor(private renderer: Renderer2) {
-    
-  }
-
   ngOnInit(): void {
-    console.log("Display Data: .....")
    this.dataService.getData().subscribe(data => {
-    console.log(data);
     this.allData = data;
     this.result = this.allData[Math.floor(Math.random() * data.length)];
-    console.log(this.result);
    })
 
   }
 
   ngAfterViewInit() {
     this.boardDiv.nativeElement.focus();
-    this.board$.subscribe();
-
   }
 
-  yourMethod(event: KeyboardEvent){
+  getInputAndProcess(event: KeyboardEvent){
     const regex = /[a-zA-Z]/;
     if(regex.test(event.key) && event.key.length === 1 && this.index < 25) {
       this.currentWord += event.key;
@@ -91,7 +85,6 @@ export class Board implements OnInit, AfterViewInit {
       if(count === index && count < this.index){
         this.renderer.addClass(el.nativeElement, 'animated');
         this.renderer.addClass(el.nativeElement, 'green');
-        // console.log(el.nativeElement);
         count ++;
       }
     })
@@ -99,8 +92,7 @@ export class Board implements OnInit, AfterViewInit {
 
   displayDifferentColor() {
     let count = this.index - 5;
-    let matchedResult = this.findColors();
-    console.log(matchedResult);
+    let matchedResult = findColorForEachKey(this.currentWord, this.result, this.keyPadColor);
     this.allKeys.forEach((el:ElementRef, index )=> {
       if(count === index && count < this.index){
         console.log('index is: ',index)
@@ -111,48 +103,7 @@ export class Board implements OnInit, AfterViewInit {
     })
   }
 
-  findColors() {
-    let matchedResult = {
-      0: '',
-      1: '',
-      2: '',
-      3: '',
-      4: ''
-    };
-    let currentWord = this.currentWord.split('');
-    let result = this.result.split('');
-    currentWord.forEach((char, index) => {
-      if(currentWord[index] === result[index]) {
-        this.keyPadColor[char] = "green";
-        this.keyPadColor = {...this.keyPadColor};
-        matchedResult[index] = "green";
-        currentWord[index] = '';
-        result[index] = '';
-      }
-    })
-    console.log('first ', matchedResult);
-    currentWord.forEach((char, index) => {
-      if(result.includes(char)) {
-        if(!char){
-          return;
-        }
-        matchedResult[index] = 'yellow';
-        this.keyPadColor[char] = "yellow";
-        this.keyPadColor = {...this.keyPadColor};
-        currentWord[index] = '';
-        let indexInResult = result.indexOf(char);
-        result[indexInResult] = '';
-      }else {
-        matchedResult[index] = 'black';
-        this.keyPadColor[char] = "black";
-        this.keyPadColor = {...this.keyPadColor};
-      }
-      
-    })
-
-
-    return matchedResult;
-  }
+  
 
   // showMessage(message: string) {
   //   this.message$.next(message);
