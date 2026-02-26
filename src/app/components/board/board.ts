@@ -55,7 +55,6 @@ export class Board implements OnInit, AfterViewInit {
       if(this.index % 5 === 0 && this.index !== 0) {
         
         this.boardDiv.nativeElement.blur();
-        console.log(this.currentWord);
         this.displayDifferentColor();
         if(this.currentWord === this.result){
           this.boardDiv.nativeElement.blur();
@@ -70,7 +69,6 @@ export class Board implements OnInit, AfterViewInit {
       }
       
     }  
-    console.log("keyboard:  ",this.keyPadColor)
   }
 
   updateCell(key: string){
@@ -96,7 +94,6 @@ export class Board implements OnInit, AfterViewInit {
     this.keyPadColor = keyPadColor;
     this.allKeys.forEach((el:ElementRef, index )=> {
       if(count === index && count < this.index){
-        console.log('index is: ',index)
         this.renderer.addClass(el.nativeElement, matchedResult[index % 5]);
         this.renderer.addClass(el.nativeElement, 'animated');
         count ++;
