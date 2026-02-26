@@ -92,7 +92,8 @@ export class Board implements OnInit, AfterViewInit {
 
   displayDifferentColor() {
     let count = this.index - 5;
-    let matchedResult = findColorForEachKey(this.currentWord, this.result, this.keyPadColor);
+    let [matchedResult, keyPadColor] = findColorForEachKey(this.currentWord, this.result, this.keyPadColor);
+    this.keyPadColor = keyPadColor;
     this.allKeys.forEach((el:ElementRef, index )=> {
       if(count === index && count < this.index){
         console.log('index is: ',index)

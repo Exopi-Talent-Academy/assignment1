@@ -1,5 +1,5 @@
 
-export function findColorForEachKey(currentword: string, targetWord: string, keyPadColor: any) {
+export function findColorForEachKey(currentword: string, targetWord: string, keyPadColor: {[key: string]: string}) {
     let matchedResult = {
       0: '',
       1: '',
@@ -18,7 +18,6 @@ export function findColorForEachKey(currentword: string, targetWord: string, key
         result[index] = '';
       }
     })
-    console.log('first ', matchedResult);
     currentWord.forEach((char, index) => {
       if(result.includes(char)) {
         if(!char){
@@ -39,5 +38,5 @@ export function findColorForEachKey(currentword: string, targetWord: string, key
     })
 
 
-    return matchedResult;
+    return [matchedResult, keyPadColor];
   }
