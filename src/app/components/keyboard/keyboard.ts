@@ -8,11 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './keyboard.html',
   styleUrl: './keyboard.scss',
 })
-export class Keyboard implements OnInit {
-  keyHandleService = inject(KeyHandle);
-
-  keysList = [];
-
+export class Keyboard {
   @Input() keyPadColor = {};
 
   keyboard = [
@@ -20,12 +16,6 @@ export class Keyboard implements OnInit {
     ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
     ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'],
   ];
-
-  ngOnInit(): void {
-    this.keyHandleService.keysList.subscribe((keysList) => {
-      this.keysList = keysList;
-    });
-  }
 
   updateColor(key: string) {
     return this.keyPadColor[key.toLowerCase()];

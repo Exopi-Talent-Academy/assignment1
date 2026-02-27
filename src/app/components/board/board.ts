@@ -99,11 +99,4 @@ export class Board implements OnInit, AfterViewInit {
       }
     });
   }
-
-  // showMessage(message: string) {
-  //   this.message$.next(message);
-  //   setTimeout(()=> {
-  //     this.message$.next(null);
-  //   }, 2000)
-  // }
 }
