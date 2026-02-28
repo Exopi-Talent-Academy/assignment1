@@ -1,0 +1,23 @@
+:host {
+    table {
+        border-collapse: collapse;
+        margin-top: 20px;
+        width: 100%;
+        text-align: center;
+
+        th, td {
+            border: 1px solid #29c03d;
+            padding: 12px;
+            color:#191a19;
+            font-weight: bold;
+            font-size: medium;
+            color: #ffffff;
+
+        }
+
+        th {
+            background-color: #50a75e;
+            font-weight: bold;
+        }
+    }
+}

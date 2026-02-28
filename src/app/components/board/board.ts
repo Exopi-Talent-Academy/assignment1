@@ -24,18 +24,18 @@ export class Board implements OnInit, AfterViewInit {
   dataService = inject(DataService);
   renderer = inject(Renderer2);
   currentWord = '';
-  allData: string[] = [];
+  allData: { id: number; word: string }[] = [];
   result = '';
 
   index = 0;
 
-  board$ = new BehaviorSubject<string[]>(new Array(25).fill(''));
+  board$ = new BehaviorSubject<string[]>(new Array(30).fill(''));
   keyPadColor = {};
 
   ngOnInit(): void {
     this.dataService.getData().subscribe((data) => {
       this.allData = data;
-      this.result = this.allData[Math.floor(Math.random() * data.length)];
+      this.result = this.allData[Math.floor(Math.random() * data.length)]['word'];
     });
   }
 
@@ -45,7 +45,7 @@ export class Board implements OnInit, AfterViewInit {
 
   getInputAndProcess(event: KeyboardEvent) {
     const regex = /[a-zA-Z]/;
-    if (regex.test(event.key) && event.key.length === 1 && this.index < 25) {
+    if (regex.test(event.key) && event.key.length === 1 && this.index < 30) {
       this.currentWord += event.key;
       this.keyHandleService.countKey(event.key);
       this.updateCell(event.key);
@@ -54,6 +54,7 @@ export class Board implements OnInit, AfterViewInit {
         this.boardDiv.nativeElement.blur();
         this.displayDifferentColor();
         if (this.currentWord === this.result) {
+          this.saveResult(true, this.index / 5);
           this.dataService.setSuccess(true);
           this.boardDiv.nativeElement.blur();
         } else {
@@ -63,6 +64,10 @@ export class Board implements OnInit, AfterViewInit {
           }, 1500);
         }
       }
+    }
+    if (this.index >= 30) {
+      this.saveResult(false, 6);
+      this.dataService.setSuccess(false);
     }
   }
 
@@ -97,6 +102,12 @@ export class Board implements OnInit, AfterViewInit {
         this.renderer.addClass(el.nativeElement, 'animated');
         count++;
       }
+    });
+  }
+
+  saveResult(success: boolean, attempts: number) {
+    this.dataService.postData({ success, attempts }).subscribe((data) => {
+      console.log('Data posted successfully:', data);
     });
   }
 }
