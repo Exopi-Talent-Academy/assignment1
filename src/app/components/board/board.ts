@@ -44,6 +44,7 @@ export class Board implements OnInit, AfterViewInit {
   }
 
   getInputAndProcess(event: KeyboardEvent) {
+    console.log(this.result);
     const regex = /[a-zA-Z]/;
     if (regex.test(event.key) && event.key.length === 1 && this.index < 30) {
       this.currentWord += event.key;
