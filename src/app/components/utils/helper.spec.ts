@@ -33,4 +33,10 @@ describe('findColorForEachKey', () => {
     expect(matchedResult).toEqual({ 0: 'green', 1: 'black', 2: 'black', 3: 'black', 4: 'black' });
     expect(keyPadColor).toEqual({ a: 'green', b: 'black' });
   });
+  it('handles duplicate letters in target word without overcounting', () => {
+    const keyPad: { [k: string]: string } = {};
+    const [matchedResult, keyPadColor] = findColorForEachKey('abcde', 'aabbc', keyPad);
+    expect(matchedResult).toEqual({ 0: 'green', 1: 'yellow', 2: 'yellow', 3: 'black', 4: 'black' });
+    expect(keyPadColor).toEqual({ a: 'green', b: 'yellow', c: 'yellow', d: 'black', e: 'black' });
+  });
 });
